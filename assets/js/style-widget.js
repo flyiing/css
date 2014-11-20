@@ -2,8 +2,11 @@
 (function($) {
 
     var _jsFiles = {}, _cssKeys = {};
-    $('script[src]').each(function() {
-        _jsFiles[$(this).attr('src')] = true;
+
+    $(window).load(function() {
+        $('script[src]').each(function() {
+            _jsFiles[$(this).attr('src')] = true;
+        });
     });
 
     $.fn.styleWidget = function(method) {
@@ -71,19 +74,20 @@
                             console.log('Loaded: ' + url + ', left = ' + left);
                             if(left < 1) {
                                 console.log('All js sources loaded!');
-                                applyJS();
+                                addRows();
                             }
                         });
                     });
                 } else
-                    applyJS();
+                    addRows();
 
-                function applyJS()
+                function addRows()
                 {
+                    console.log('Adding row...');
                     obj.$list.append(data.row);
                     $widget.trigger('propsAdded.styleWidget');
-                    $widget.styleWidget('changeSelect');
 
+                    console.log('Eval js...');
                     $.each(data.js, function(pos, js) {
                         $.each(js, function(key, code) {
                             $.globalEval(code);
@@ -132,6 +136,8 @@
             obj.$button.attr('disabled', 'disabled').
                 removeClass(options.btnAddClass).
                 removeClass(options.btnDelClass);
+            if(id.length < 1)
+                return;
             var $row = this.find('.css-style-props [data-css-prop='+id+']');
             if($row.length > 0) {
                 obj.$button.html(options.btnDelLabel).addClass(options.btnDelClass);
@@ -210,6 +216,7 @@
                 $rows.off('click.styleWidget').on('click.styleWidget', function() {
                     $widget.styleWidget('changeSelect', $(this).attr('data-css-prop'));
                 });
+                $widget.styleWidget('changeSelect', $(this).attr('data-css-prop'));
             });
 
             this.trigger('propsAdded.styleWidget');

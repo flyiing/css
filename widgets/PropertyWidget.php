@@ -72,6 +72,8 @@ CSS;
         $return = Html::beginTag('div', $this->options);
         $return .= '<div class="form-group css-prop-use">';
 
+        $return .= Html::input('hidden', Html::name2id($this->name. '[use]'), 1);
+/*
         $return .= CheckboxX::widget([
             'id' => Html::name2id($this->name. '[use]'),
             'name' => $this->name. '[use]',
@@ -81,7 +83,7 @@ CSS;
                 'size' => 'lg',
             ],
         ]);
-
+*/
         $return .= '</div>';
 
         $type = ArrayHelper::getValue($this->_config, 'type');
