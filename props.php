@@ -31,4 +31,20 @@ return [
         'type' => 'border',
     ],
 
+    'padding' => [
+        'type' => 'size-px',
+    ],
+    'padding-top' => [
+        'type' => 'size-px',
+    ],
+    'padding-right' => [
+        'type' => 'size-px',
+    ],
+    'padding-bottom' => [
+        'type' => 'size-px',
+    ],
+    'padding-left' => [
+        'type' => 'size-px',
+    ],
+
 ];
