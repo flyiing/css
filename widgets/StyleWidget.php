@@ -2,7 +2,6 @@
 
 namespace flyiing\css\widgets;
 
-use flyiing\uni\Icon;
 use Yii;
 use yii\bootstrap\Button;
 use yii\helpers\Html;
@@ -91,8 +90,8 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
         $pluginOptions = [
             'url' => Url::toRoute($this->url),
             'propsAvail' => $this->_props,
-            'btnAddLabel' => Icon::show('plus', ['spacer' => false]),
-            'btnDelLabel' => Icon::show('minus', ['spacer' => false]),
+            'btnAddLabel' => '<span class="glyphicon glyphicon-plus"></span>',
+            'btnDelLabel' => '<span class="glyphicon glyphicon-minus"></span>',
             'btnAddClass' => 'btn-success',
             'btnDelClass' => 'btn-danger',
             'delRowConfirm' => Yii::t('css', 'Are you sure to delete this property?'),

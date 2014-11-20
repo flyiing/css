@@ -6,7 +6,7 @@ use Yii;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
 use kartik\checkbox\CheckboxX;
-use flyiing\uni\helpers\Html;
+use flyiing\widgets\Html;
 use flyiing\css\CssProps;
 
 class PropertyWidget extends \flyiing\widgets\base\InputWidget
