@@ -5,7 +5,6 @@ namespace flyiing\css\widgets;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
-use kartik\checkbox\CheckboxX;
 use flyiing\widgets\Html;
 use flyiing\css\CssProps;
 
@@ -72,7 +71,7 @@ CSS;
         $return = Html::beginTag('div', $this->options);
         $return .= '<div class="form-group css-prop-use">';
 
-        $return .= Html::input('hidden', Html::name2id($this->name. '[use]'), 1);
+        $return .= Html::input('hidden', $this->name. '[use]', 1);
 /*
         $return .= CheckboxX::widget([
             'id' => Html::name2id($this->name. '[use]'),
