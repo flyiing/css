@@ -110,7 +110,7 @@ JS;
         $return = Html::beginTag('div', ['class' => 'input-group select2-bootstrap-prepend']);
         $return .= Html::beginTag('div', ['class' => 'input-group-btn']);
         $return .= Button::widget([
-            'label' => Icon::show('plus', ['spacer' => false]),
+            'label' => '<span class="glyphicon glyphicon-plus"></span>',
             'encodeLabel' => false,
             'options' => [
                 'type' => 'button',
