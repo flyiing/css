@@ -5,7 +5,6 @@ namespace flyiing\css\widgets;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\base\InvalidConfigException;
-use flyiing\widgets\Html;
 use flyiing\css\CssProps;
 
 class PropertyWidget extends \flyiing\widgets\base\InputWidget
@@ -74,7 +73,7 @@ CSS;
         $return .= Html::input('hidden', $this->name. '[use]', 1);
 /*
         $return .= CheckboxX::widget([
-            'id' => Html::name2id($this->name. '[use]'),
+            'id' => \flyiing\widgets\Html::name2id($this->name. '[use]'),
             'name' => $this->name. '[use]',
             'value' => ArrayHelper::getValue($this->value, 'use', 0),
             'pluginOptions' => [
@@ -123,7 +122,7 @@ CSS;
             if(($widgetClass = ArrayHelper::remove($inputOptions, 'class', $this->defaultWidgetClass)) === false)
                 throw new InvalidConfigException('Can not resolve widget class.');
             $inputOptions['name'] = $name;
-            $inputOptions['id'] = Html::name2id($name);
+            $inputOptions['id'] = \flyiing\widgets\Html::name2id($name);
             $inputOptions['value'] = $value;
             Html::addCssClass($inputOptions, 'css-prop-input');
             $return = '<div class="form-group css-prop-input">';
