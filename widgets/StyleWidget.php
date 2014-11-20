@@ -9,7 +9,6 @@ use yii\helpers\Json;
 use yii\helpers\ArrayHelper;
 use flyiing\css\CssProps;
 use yii\helpers\Url;
-use yii\helpers\VarDumper;
 
 class StyleWidget extends \flyiing\widgets\base\InputWidget
 {
@@ -36,14 +35,6 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
 
     public function initProps()
     {
-/*
-        $this->_props = CssProps::getProps();
-        foreach($this->_props as $k => $v) {
-            $this->_props[$k] = [
-                'label' => Yii::t('css.prop.label', $k),
-            ];
-        }
-*/
         $this->_props = [];
         foreach (CssProps::getProps() as $k => $v) {
             $this->_props[] = [
