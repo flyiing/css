@@ -1,0 +1,26 @@
+{
+    "name": "flyiing/css",
+    "description": "CSS related utils, widgets, etc",
+    "keywords": ["yii2"],
+    "type": "yii2-extension",
+
+    "authors": [
+        {
+            "name": "Aleksander V. Dyomin",
+            "email": "aleksanderd@gmail.com"
+        }
+    ],
+
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "flyiing\\css\\": ""
+        }
+    }
+}
