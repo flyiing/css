@@ -17,34 +17,36 @@ return [
 
     'border' => [
         'type' => 'border',
+        'default' => 1,
     ],
     'border-top' => [
-        'type' => 'border',
+        'parent' => 'border',
     ],
     'border-right' => [
-        'type' => 'border',
+        'parent' => 'border',
     ],
     'border-bottom' => [
-        'type' => 'border',
+        'parent' => 'border',
     ],
     'border-left' => [
-        'type' => 'border',
+        'parent' => 'border',
     ],
 
     'padding' => [
         'type' => 'size-px',
+        'default' => 1,
     ],
     'padding-top' => [
-        'type' => 'size-px',
+        'parent' => 'padding',
     ],
     'padding-right' => [
-        'type' => 'size-px',
+        'parent' => 'padding',
     ],
     'padding-bottom' => [
-        'type' => 'size-px',
+        'parent' => 'padding',
     ],
     'padding-left' => [
-        'type' => 'size-px',
+        'parent' => 'padding',
     ],
 
 ];

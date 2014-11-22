@@ -3,6 +3,7 @@
 namespace flyiing\css;
 
 use Yii;
+use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -70,12 +71,24 @@ class CssProps extends \yii\base\Object
     /**
      * Инициализирует и возвращет массив известных css-свойств
      * @param bool $forced
+     * @throws \yii\base\InvalidConfigException
      * @return array|null
      */
     public static function initProps($forced = false)
     {
-        if(static::$_props === null || $forced)
+        if (static::$_props === null || $forced) {
             static::$_props = require(__DIR__ . DIRECTORY_SEPARATOR . 'props.php');
+            foreach (static::$_props as $prop => $config) {
+                while (isset($config['parent'])) {
+                    $config = static::getProps($config['parent']);
+                    if ($config === false) {
+                        throw new InvalidConfigException(sprintf('Unknown property name[%s] in parents for [%s].',
+                            $config['parent'], $prop));
+                    }
+                    static::$_props[$prop] = ArrayHelper::merge($config, static::$_props[$prop]);
+                }
+            }
+        }
         return static::$_props;
     }
 
