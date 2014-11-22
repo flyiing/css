@@ -78,7 +78,21 @@
                 function addRows()
                 {
                     console.log('Adding row...');
-                    obj.$list.append(data.row);
+                    var $afterRow = false;
+                    obj.$list.find('[data-css-prop]').each(function(k, v) {
+                        var rid = $(this).attr('data-css-prop');
+                        if(rid.length > 0) {
+                            if(options.propsOrder[id] > options.propsOrder[rid]) {
+                                $afterRow = $(this);
+                            }
+                        }
+
+                    });
+                    if($afterRow === false) {
+                        obj.$list.prepend(data.row);
+                    } else {
+                        $afterRow.after(data.row);
+                    }
 
                     console.log('Eval js...');
                     $.each(data.js, function(pos, js) {
