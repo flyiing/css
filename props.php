@@ -17,7 +17,11 @@ return [
 
     'border' => [
         'type' => 'border',
-        'default' => 1,
+        'default' => [
+            'width' => 1,
+            'style' => 'solid',
+            'color' => '#000000',
+        ],
     ],
     'border-top' => [
         'parent' => 'border',
