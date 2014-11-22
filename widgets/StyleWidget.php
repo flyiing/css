@@ -46,6 +46,7 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
 
     public function run()
     {
+        $return = '';
         $props = $this->value;
         $baseName = $this->name;
         $options = $this->options;
@@ -65,19 +66,19 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
         }
 
         $tag = ArrayHelper::remove($options, 'tag', 'div');
-        echo Html::beginTag($tag, $options) . PHP_EOL;
-        echo Html::beginTag('div', $this->toolbarOptions);
-        echo $this->renderToolbar($baseName);
-        echo Html::endTag('div');
-        echo Html::beginTag('div', ['class' => 'css-style-props panel-body']) . PHP_EOL;
+        $return .= Html::beginTag($tag, $options) . PHP_EOL;
+        $return .= Html::beginTag('div', $this->toolbarOptions);
+        $return .= $this->renderToolbar($baseName);
+        $return .= Html::endTag('div');
+        $return .= Html::beginTag('div', ['class' => 'css-style-props panel-body']) . PHP_EOL;
         foreach (CssProps::sort($props) as $propName => $propValue) {
             if (CssProps::getProps($propName) === false)
                 continue;
-            echo $this->render('@flyiing/css/widgets/views/property',
+            $return .= $this->render('@flyiing/css/widgets/views/property',
                 compact('baseName', 'propName', 'propValue'));
         }
-        echo Html::endTag('div');
-        echo Html::endTag($tag) . PHP_EOL;
+        $return .= Html::endTag('div');
+        $return .= Html::endTag($tag) . PHP_EOL;
 
         $pluginOptions = [
             'url' => Url::toRoute($this->url),
@@ -93,6 +94,8 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
         $("#{$options['id']}").styleWidget($pluginOptions);
 JS;
         $this->view->registerJs($js);
+
+        return $return;
 
     }
 
