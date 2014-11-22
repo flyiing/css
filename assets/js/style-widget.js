@@ -34,7 +34,6 @@
 
             }, function (data) {
 
-                var posCodes = { POS_HEAD: 1, POS_BEGIN: 2, POS_END: 3, POS_READY: 4, POS_LOAD: 5 };
                 var $head = $('head');
                 var $body = $('body');
                 $.each(data.cssFiles, function(url, code) {
@@ -60,8 +59,9 @@
                         if(_jsFiles[url] === undefined) {
                             js2load.push(url);
                             _jsFiles[url] = true;
-                        } else
+                        } else {
                             console.log('JSFile.Skip: ' + url);
+                        }
                     });
                 });
 
