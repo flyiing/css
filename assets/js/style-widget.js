@@ -79,7 +79,6 @@
                 {
                     console.log('Adding row...');
                     obj.$list.append(data.row);
-                    $widget.trigger('propsAdded.styleWidget');
 
                     console.log('Eval js...');
                     $.each(data.js, function(pos, js) {
@@ -87,6 +86,8 @@
                             $.globalEval(code);
                         });
                     });
+
+                    $widget.trigger('propsAdded.styleWidget');
                 }
 
 /*
