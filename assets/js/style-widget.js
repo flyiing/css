@@ -35,7 +35,6 @@
             }, function (data) {
 
                 var $head = $('head');
-                var $body = $('body');
                 $.each(data.cssFiles, function(url, code) {
                     if($('link[href="'+url+'"][rel="stylesheet"]').length == 0)
                         $head.append(code);
@@ -46,11 +45,6 @@
                         _cssKeys[key] = true;
                     } else
                         console.log('CSS.Skip: ' + key);
-                });
-
-                var jsItems = [];
-                $.each(posCodes, function(k, v) {
-                    jsItems[v] = [];
                 });
 
                 var js2load = [];
