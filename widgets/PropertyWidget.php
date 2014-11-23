@@ -37,6 +37,7 @@ class PropertyWidget extends \flyiing\widgets\base\InputWidget
 
     public function run()
     {
+/*
         $js = <<<JS
         function cssPropWidgetCheckUse(checkbox)
         {
@@ -56,7 +57,7 @@ class PropertyWidget extends \flyiing\widgets\base\InputWidget
         });
 JS;
         $this->view->registerJs($js);
-
+*/
         $css = <<<CSS
         .css-prop-widget .css-prop-use {
             padding: 5px 10px;
