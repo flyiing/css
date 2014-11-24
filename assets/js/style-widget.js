@@ -104,14 +104,6 @@
                     $widget.trigger('propsAdded.styleWidget');
                 }
 
-/*
-                var $rows = obj.$list.find('[data-css-prop]');
-                if($rows.length > 0) {
-                    console.log($rows.length);
-                } else {
-                    obj.$list.append(data.row);
-                }
-*/
             }).fail(function () {
                 console.log('failed');
             });
