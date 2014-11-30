@@ -79,7 +79,7 @@
                 {
                     console.log('Adding row...');
                     var $afterRow = false;
-                    obj.$list.find('[data-css-prop]').each(function(k, v) {
+                    obj.$list.find('[data-css-prop]').each(function() {
                         var rid = $(this).attr('data-css-prop');
                         if(rid.length > 0) {
                             if(options.propsOrder[id] > options.propsOrder[rid]) {

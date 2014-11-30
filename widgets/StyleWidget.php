@@ -90,10 +90,7 @@ class StyleWidget extends \flyiing\widgets\base\InputWidget
             'delRowConfirm' => Yii::t('css', 'Are you sure to delete this property?'),
         ];
         $pluginOptions = Json::encode($pluginOptions);
-        $js = <<<JS
-        $("#{$options['id']}").styleWidget($pluginOptions);
-JS;
-        $this->view->registerJs($js);
+        $this->view->registerJs('jQuery("#'. $options['id'] .'").styleWidget('. $pluginOptions .');');
 
         return $return;
 
