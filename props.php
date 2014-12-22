@@ -15,6 +15,10 @@ return [
         'default' => '#ffffff',
     ],
 
+    'background-image' => [
+        'type' => 'background-image',
+    ],
+
     'border' => [
         'type' => 'border',
         'default' => [

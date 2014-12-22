@@ -65,4 +65,13 @@ return [
         ],
     ],
 
+    'background-image' => [
+        'input' => [
+            'class' => \flyiing\widgets\base\InputWidget::className(),
+        ],
+        'render' => function($value) {
+                return sprintf('url("%s")', $value);
+            },
+    ],
+
 ];

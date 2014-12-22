@@ -11,19 +11,21 @@
 
     $.fn.styleWidget = function(method) {
 
-        if (methods[method])
+        if (methods[method]) {
             return methods[method].apply( this, Array.prototype.slice.call(arguments, 1));
-        else if (typeof method === 'object' || !method)
+        } else if (typeof method === 'object' || !method) {
             return methods.init.apply(this, arguments);
-        else
+        } else {
             $.error('jQuery.styleWidget: Method "' +  method + '" not found.');
+        }
     };
 
     var methods = {
 
         add: function(id) {
-            if(this.find('.css-style-props [data-css-prop='+id+']').length > 0)
+            if (this.find('.css-style-props [data-css-prop='+id+']').length > 0) {
                 return false;
+            }
             var $widget = this;
             var obj = this.data('obj');
             var options = this.data('options');
@@ -34,46 +36,59 @@
 
             }, function (data) {
 
+                console.log('Got row...');
                 var $head = $('head');
-                $.each(data.cssFiles, function(url, code) {
-                    if($('link[href="'+url+'"][rel="stylesheet"]').length == 0)
-                        $head.append(code);
-                });
-                $.each(data.css, function(key, code) {
-                    if(_cssKeys[key] === undefined) {
-                        $head.append(code);
-                        _cssKeys[key] = true;
-                    } else
-                        console.log('CSS.Skip: ' + key);
-                });
 
-                var js2load = [];
-                $.each(data.jsFiles, function(pos, files) {
-                    $.each(files, function(url, code) {
-                        if(_jsFiles[url] === undefined) {
-                            js2load.push(url);
-                            _jsFiles[url] = true;
-                        } else {
-                            console.log('JSFile.Skip: ' + url);
+                if (data.cssFiles !== null) {
+                    $.each(data.cssFiles, function(url, code) {
+                        if ($('link[href="'+url+'"][rel="stylesheet"]').length == 0) {
+                            $head.append(code);
+                            console.log('CSSFile.Added: ' + url);
                         }
                     });
-                });
+                }
+                if (data.css !== null) {
+                    $.each(data.css, function(key, code) {
+                        if (_cssKeys[key] === undefined) {
+                            $head.append(code);
+                            _cssKeys[key] = true;
+                            console.log('CSS.Added: ' + key);
+                        } else {
+                            console.log('CSS.Skip: ' + key);
+                        }
+                    });
+                }
+                var js2load = [];
+                if (data.jsFiles !== null) {
+                    $.each(data.jsFiles, function(pos, files) {
+                        $.each(files, function(url, code) {
+                            if (_jsFiles[url] === undefined) {
+                                js2load.push(url);
+                                _jsFiles[url] = true;
+                                console.log('JSFile.Added: ' + url);
+                            } else {
+                                console.log('JSFile.Skip: ' + url);
+                            }
+                        });
+                    });
+                }
 
                 var left = js2load.length;
-                if(left > 0) {
+                if (left > 0) {
                     $.each(js2load, function(k, url) {
                         console.log('Loading: ' + url + ', left = ' + left);
                         $.getScript(url, function() {
                             left--;
                             console.log('Loaded: ' + url + ', left = ' + left);
-                            if(left < 1) {
+                            if (left < 1) {
                                 console.log('All js sources loaded!');
                                 addRows();
                             }
                         });
                     });
-                } else
+                } else {
                     addRows();
+                }
 
                 function addRows()
                 {
@@ -81,25 +96,27 @@
                     var $afterRow = false;
                     obj.$list.find('[data-css-prop]').each(function() {
                         var rid = $(this).attr('data-css-prop');
-                        if(rid.length > 0) {
+                        if (rid.length > 0) {
                             if(options.propsOrder[id] > options.propsOrder[rid]) {
                                 $afterRow = $(this);
                             }
                         }
 
                     });
-                    if($afterRow === false) {
+                    if ($afterRow === false) {
                         obj.$list.prepend(data.row);
                     } else {
                         $afterRow.after(data.row);
                     }
 
-                    console.log('Eval js...');
-                    $.each(data.js, function(pos, js) {
-                        $.each(js, function(key, code) {
-                            $.globalEval(code);
+                    if (data.js !== null) {
+                        console.log('Eval js...');
+                        $.each(data.js, function(pos, js) {
+                            $.each(js, function(key, code) {
+                                $.globalEval(code);
+                            });
                         });
-                    });
+                    }
 
                     $widget.trigger('propsAdded.styleWidget');
                 }
@@ -123,30 +140,32 @@
         changeSelect: function(id) {
             var options = this.data('options');
             var obj = this.data('obj');
-            if(id === undefined) {
+            if (id === undefined) {
                 id = obj.$select.select2('val');
             } else {
                 obj.$select.select2('val', id);
             }
             var prevID = this.data('_prevID');
             var prevBG = this.data('_prevBG');
-            if(prevID !== undefined && prevBG !== undefined) {
+            if (prevID !== undefined && prevBG !== undefined) {
                 this.find('.css-style-props [data-css-prop='+prevID+']').
                     finish().css('background-color', prevBG);
             }
             obj.$button.attr('disabled', 'disabled').
                 removeClass(options.btnAddClass).
                 removeClass(options.btnDelClass);
-            if(id.length < 1)
+            if (id.length < 1) {
                 return;
+            }
             var $row = this.find('.css-style-props [data-css-prop='+id+']');
-            if($row.length > 0) {
+            if ($row.length > 0) {
                 obj.$button.html(options.btnDelLabel).addClass(options.btnDelClass);
-                if(id !== prevID) {
+                if (id !== prevID) {
                     this.data('_prevBG', $row.css('background-color'));
                     $row.effect('highlight', function() {
-                        if(obj.$select.select2('val') == id)
+                        if (obj.$select.select2('val') == id) {
                             $row.css('background-color', options.activeRowBG);
+                        }
                     });
                 }
             } else {
@@ -200,10 +219,10 @@
             obj.$button.on('click.styleWidget', function() {
                 var id = obj.$select.select2('val');
                 var $row = $widget.find('.css-style-props [data-css-prop='+id+']');
-                if($row.length > 0) {
+                if ($row.length > 0) {
                     var prevBG = $row.css('background-color');
                     $row.css('background-color', options.delRowBG);
-                    if(confirm(options.delRowConfirm))
+                    if (confirm(options.delRowConfirm))
                         $widget.styleWidget('del', id);
                     else
                         $row.css('background-color', prevBG);

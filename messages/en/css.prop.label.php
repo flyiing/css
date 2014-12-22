@@ -3,6 +3,7 @@
 return [
     'color' => 'Color',
     'background-color' => 'Background color',
+    'background-image' => 'Background image',
     'border' => 'Border',
     'border-top' => 'Top border',
     'border-bottom' => 'Bottom border',
